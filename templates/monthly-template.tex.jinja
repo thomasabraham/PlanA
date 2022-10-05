@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1.5cm,portrait]{geometry}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\pagestyle{empty}
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+\begin{document}
+
+\centering
+\section{ {{ month }} }
+
+\begin{table}[th]
+\centering
+\setlength\extrarowheight{3pt}
+\begin{tabularx}{\textwidth}{| c | l | c | X | c | c | c | c | c | c | c | c | c |}
+
+  \hline
+  {\large W} & {\large D} & {\large WD} & {\large AGENDA} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & W\\
+  \hline
+  {% for day in days %}
+    {% if day.day == '01' or day.week_day == 'Mon' %}
+      \multirow{ {{day.week_days_left}} }{*}{ {\large {{day.calendar_week}} } }
+    {% endif %}
+    & {\large {{ day.day }} } & {{ day.week_day }} &  &  &  &  &  &  &  &  &  &  \\
+    {% if day.week_day =='Sun' %}
+      \hline
+    {% else %}
+      \cline{2-13}
+    {% endif %}
+  {% endfor %}
+  \hline
+
+\end{tabularx}
+\end{table}
+\end{document}
