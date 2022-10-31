@@ -1,9 +1,19 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[margin=1.5cm,portrait]{geometry}
+\usepackage[portrait]{geometry}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{tabularx}
-
+\usepackage[table]{xcolor}
+\geometry{
+    a4paper,
+    total={210mm,297mm},
+    left=20mm,
+    right=20mm,
+    tmargin=0mm,
+    top=20mm,
+    bmargin=0mm,
+    bottom=20mm,
+}
 \pagestyle{empty}
 
 \makeatletter
@@ -15,19 +25,26 @@
 \centering
 \section{ {{ month }} }
 
-\begin{table}[th]
+\begin{table}[hbt!]
 \centering
 \setlength\extrarowheight{3pt}
 \begin{tabularx}{\textwidth}{| c | l | c | X | c | c | c | c | c | c | c | c | c |}
 
   \hline
-  {\large W} & {\large D} & {\large WD} & {\large AGENDA} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & W\\
+  \rowcolor{gray}
+  {\large {\bf W} } & {\large {\bf D} } & {\large {\bf WD} } & {\large {\bf AGENDA} } &
+  {\bf 1}&{\bf 2}&{\bf 3}&{\bf 4}&{\bf 5}&{\bf 6}&{\bf 7}&{\bf 8}&{\bf W}\\
   \hline
   {% for day in days %}
     {% if day.day == '01' or day.week_day == 'Mon' %}
       \multirow{ {{day.week_days_left}} }{*}{ {\large {{day.calendar_week}} } }
     {% endif %}
-    & {\large {{ day.day }} } & {{ day.week_day }} &  &  &  &  &  &  &  &  &  &  \\
+    {% if day.week_day =='Sat' or day.week_day =='Sun'  %}
+      & {\large {\bf {\cellcolor{lightgray}{{day.day}} }}} & {\bf {\cellcolor{lightgray}{{ day.week_day }} }}
+      & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } & {\cellcolor{lightgray} } \\
+    {% else %}
+      & {\large {\bf {{ day.day }} }} & {\bf {{ day.week_day }} } &  &  &  &  &  &  &  &  &  &  \\[1ex]
+    {% endif %}
     {% if day.week_day =='Sun' %}
       \hline
     {% else %}
@@ -35,7 +52,6 @@
     {% endif %}
   {% endfor %}
   \hline
-
 \end{tabularx}
 \end{table}
 \end{document}
