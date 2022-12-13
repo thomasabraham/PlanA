@@ -13,8 +13,13 @@ Template to generate the intermediate latex document.
 To convert latex document to pdf using pdflatex
 
 ## Use
+### To generate a monthly planner
+``` shell
+./plan-a.py month nov && pdflatex temp.tex
+```
+### To generate a weekly planner
 
 ``` shell
-./plan-a.py nov > temp.tex
-pdflatex temp.tex
+./plan-a.py week cw33 && pdflatex temp.tex
 ```
+
