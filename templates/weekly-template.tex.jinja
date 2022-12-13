@@ -1,0 +1,43 @@
+\documentclass[a5paper,12pt]{article}
+\usepackage[portrait]{geometry}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\geometry{
+    a5paper,
+    total={148mm,210mm},
+    left=15mm,
+    right=15mm,
+    tmargin=0mm,
+    top=20mm,
+    bmargin=0mm,
+    bottom=20mm,
+}
+\pagestyle{empty}
+
+\begin{document}
+
+\centering
+\section*{ {{start_date.year}} - CW{{ start_date.isocalendar().week }} }
+
+\begin{table}[hbt!]
+\centering
+\setlength\extrarowheight{5pt}
+\begin{tabularx}{\textwidth}{| c | X |m{5mm}|m{5mm}|m{5mm}|}
+
+  \hline
+  \rowcolor{gray}
+  {\large {\bf Date } } & {\large {\bf AGENDA} } & \multicolumn{3}{ c }{\bf KPIs}\\
+  \hline
+  {% for i in range(0,7) %}
+    {\bf {{start_date.replace(day=start_date.day+i)}} } &   &   &   &\\
+    \cline{3-5}
+    {\bf {{start_date.replace(day=start_date.day+i).strftime("%A")}} } &   &   &   &\\
+    \cline{3-5}
+    &   &   &   &\\
+    \hline
+  {% endfor %}
+\end{tabularx}
+\end{table}
+\end{document}

@@ -34,8 +34,9 @@ def week(week, output):
     if w == 0:
         click.echo(f"Calendar week {week} is not valid!")
         return 1
-    pass
-
+    start_date = weekly.find_start_date(w)
+    click.echo(f"Generating weekly planner for {week} starting on {start_date}")
+    output.write(weekly.render_template(start_date))
 
 if __name__ == '__main__':
     plan_a()
