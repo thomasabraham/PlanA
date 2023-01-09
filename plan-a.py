@@ -8,6 +8,13 @@ import weekly
 
 @click.group()
 def plan_a():
+    """
+    A monthly/weekly planner generator.
+
+    Plan-A uses a Jinja templates that get rendered to a Latex document.
+    Default templates for a weekly and a monthly planner are provided.
+
+    """
     pass
 
 
